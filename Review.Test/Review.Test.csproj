@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Review.Contrast\Review.Contract.csproj" />
+    <ProjectReference Include="..\Review.Model\Review.Model.csproj" />
+    <ProjectReference Include="..\Review.Repository\Review.Repository.csproj" />
+    <ProjectReference Include="..\Review.Service\Review.Service.csproj" />
+  </ItemGroup>
+
+</Project>
