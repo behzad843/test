@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Review.Contract;
-using Review.Repository.Context;
-using Review.Repository.GenericRepository;
-using Review.Repository.UnitOfWork;
-using Review.Service;
+using Review.Base;
+using System.IO;
 
 namespace Review.API
 {
@@ -25,12 +21,7 @@ namespace Review.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ReviewContext>(options => options.UseInMemoryDatabase(databaseName: "ReviewDB")); 
-            services.AddScoped(typeof(DbContext), typeof(ReviewContext));
-            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped(typeof(IProductService), typeof(ProductService));
-            services.AddScoped(typeof(IReviewService), typeof(ReviewService));
+            IocConfig.Configure(services, Configuration);
 
             services
                 .AddMvc(a => { a.EnableEndpointRouting = false; })
@@ -38,6 +29,8 @@ namespace Review.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "Review API", Version = "v1"});
+
+                c.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "apiDocument.xml"));
             });
         }
 

@@ -18,6 +18,13 @@ namespace Review.API.Controllers
             ReviewService = reviewService;
         }
 
+        /// <summary>
+        /// Get Products from cache
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///     GET api/product
+        /// </remarks>
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> Get()
@@ -25,6 +32,14 @@ namespace Review.API.Controllers
             return Json(await ProductService.GetAll());
         }
 
+        /// <summary>
+        /// Get Reviews by productId
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///     GET api/product/{id}/review
+        /// </remarks>
+        /// <param name="id"></param> 
         [HttpGet]
         [Route("{id}/review")]
         public async Task<IActionResult> GetReviews([FromRoute] int id)
@@ -32,6 +47,14 @@ namespace Review.API.Controllers
             return Json(await ReviewService.GetByProductId(id));
         }
 
+        /// <summary>
+        /// Get Review summary by productId
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///     GET api/product/{id}/review-summary
+        /// </remarks>
+        /// <param name="id"></param> 
         [HttpGet]
         [Route("{id}/review-summary")]
         public async Task<IActionResult> GetReviewSummary([FromRoute] int id)
@@ -39,6 +62,20 @@ namespace Review.API.Controllers
             return Json(await ReviewService.GetReviewSummary(id));
         }
 
+        /// <summary>
+        /// create Review per productId
+        /// </summary>
+        /// <example>
+        ///   api/product/1/review
+        ///   POST 
+        ///   {
+        ///     "score" = 4, //1 to 5
+        ///     "title" = "for test",
+        ///     "comment" = "for test",
+        ///     "recommended" = true,
+        ///   }
+        /// <example>
+        /// <param name="id"></param> 
         [HttpPost]
         [Route("{id}/review")]
         public async Task<IActionResult> Create([FromRoute] int id, [FromBody] ReviewCreateRequest request)

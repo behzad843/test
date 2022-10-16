@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Review.API</name>
+    </assembly>
+    <members>
+        <member name="M:Review.API.Controllers.ProductController.Get">
+            <summary>
+            Get Products from cache
+            </summary>
+            <remarks>
+            Sample request:
+                GET api/product
+            </remarks>
+        </member>
+        <member name="M:Review.API.Controllers.ProductController.GetReviews(System.Int32)">
+            <summary>
+            Get Reviews by productId
+            </summary>
+            <remarks>
+            Sample request:
+                GET api/product/{id}/review
+            </remarks>
+            <param name="id"></param> 
+        </member>
+        <member name="M:Review.API.Controllers.ProductController.GetReviewSummary(System.Int32)">
+            <summary>
+            Get Review summary by productId
+            </summary>
+            <remarks>
+            Sample request:
+                GET api/product/{id}/review-summary
+            </remarks>
+            <param name="id"></param> 
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Review.API.Controllers.ProductController.Create(System.Int32,Review.Model.Models.ReviewCreateRequest)" -->
+    </members>
+</doc>
